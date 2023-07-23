@@ -69,7 +69,7 @@ def bookingSubmit(request):
     day = request.session.get('day')
     type = request.session.get('type')
 
-    #Only show the time of the day that has not been selected before:
+    # Only show the time of the day that has not been selected before:
     hour = checkTime(times, day)
     if request.method == 'POST':
         time = request.POST.get("time")
@@ -82,7 +82,7 @@ def bookingSubmit(request):
             else:
                 messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
         else:
-            messages.success(request, "Please Select A Tervice!")
+            messages.success(request, "Please Select A Type!")
 
     return render(request, 'bookingSubmit.html', {
         'times': hour,
