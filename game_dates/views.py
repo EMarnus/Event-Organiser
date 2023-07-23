@@ -90,8 +90,21 @@ def bookingSubmit(request):
     })
 
 
+"""
+Only show the time of the day that has not been selected before
+"""
+def checkTime(times, day):
+    x = []
+    for k in times:
+        if Appointment.objects.filter(day=day, time=k).count() < 1:
+            x.append(k)
+    return x
+
+
+"""
+Loops days you want
+"""
 def validWeekday(days):
-    # Loop days you want in the next 21 days:
     today = datetime.now()
     weekdays = []
     for i in range(0, days):
@@ -99,6 +112,11 @@ def validWeekday(days):
         y = x.strftime('%A')
         weekdays.append(x.strftime('%Y-%m-%d'))
     return weekdays
+
+
+def dayToWeekday(x):
+    z = datetime.strptime(x, "%Y-%m-%d")
+    y = z.strftime('%A')
 
 
 def userPanel(request):
@@ -188,4 +206,32 @@ def userUpdateSubmit(request, id):
     return render(request, 'userUpdateSubmit.html', {
         'times': hour,
         'id': id,
+    })
+
+
+"""
+Only show the time of the day that has not been selected before
+"""
+def checkEditTime(times, day, id):
+    x = []
+    appointment = Appointment.objects.get(pk=id)
+    time = appointment.time
+    for k in times:
+        if Appointment.objects.filter(day=day, time=k).count() < 1 or time == k:
+            x.append(k)
+    return x
+
+
+def organiserPanel(request):
+    today = datetime.today()
+    minDate = today.strftime('%Y-%m-%d')
+    deltatime = today + timedelta(days=31)
+    strdeltatime = deltatime.strftime('%Y-%m-%d')
+    maxDate = strdeltatime
+    # Only show the Appointments 31 days from today
+    items = Appointment.objects.filter(
+        day__range=[minDate, maxDate]).order_by('day', 'time')
+
+    return render(request, 'organiserPanel.html', {
+        'items': items,
     })
