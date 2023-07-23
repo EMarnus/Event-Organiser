@@ -98,3 +98,43 @@ def validWeekday(days):
         y = x.strftime('%A')
         weekdays.append(x.strftime('%Y-%m-%d'))
     return weekdays
+
+
+def userPanel(request):
+    user = request.user
+    appointments = Appointment.objects.filter(user=user).order_by(
+        'day', 'time')
+    return render(request, 'userPanel.html', {
+        'user': user,
+        'appointments': appointments,
+    })
+
+
+def userUpdate(request, id):
+    appointment = Appointment.objects.get(pk=id)
+    userdatepicked = appointment.day
+    # Copy  booking:
+    today = datetime.today()
+    minDate = today.strftime('%Y-%m-%d')
+
+    # 24h if statement in template:
+    delta24 = (userdatepicked).strftime('%Y-%m-%d') >= (
+        today + timedelta(days=1)).strftime('%Y-%m-%d')
+    # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
+    validateWeekdays = validWeekday(31)
+
+    if request.method == 'POST':
+        service = request.POST.get('service')
+        day = request.POST.get('day')
+
+        # Store day and service in django session:
+        request.session['day'] = day
+        request.session['service'] = service
+
+        return redirect('userUpdateSubmit', id=id)
+
+    return render(request, 'userUpdate.html', {
+            'validateWeekdays': validateWeekdays,
+            'delta24': delta24,
+            'id': id,
+        })
