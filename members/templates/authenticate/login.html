@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <div class="container">
   <div class="row">
     <div class="col-md-8 md-3 offset-md-2">
-      <h3>Sign In</h3>
+      <h3>Login</h3>
       <p>Welcome back. To add an event or leave a comment, please log in. If you
         have not created an account yet, then <a class="link" href="#">sign up</a>
         first.</p>
@@ -15,15 +14,15 @@
     <div class="col-md-8 mt-3 offset-md-2">
         <form action="" method=POST>
             {% csrf_token %}
-            <div>
+            <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
                 <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
             </div>
-            <div>
+            <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" name="password">
             </div>
-            <div>
+            <div class="col-md-8 md-3">
                 <input type="submit" value="Submit" class="btn btn-secondary">
             </div>
         </form>
