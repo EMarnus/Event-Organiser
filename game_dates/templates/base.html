@@ -33,11 +33,26 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="{% url 'booking' %}">Add Event</a>
+                    </li>
+                    {% if user.username == 'staff' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'organiserPanel' %}">Add Event</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle cHover" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          User
+                        </a>
+                        <ul class="dropdown-menu  border zNav">
+                          <li><a class="dropdown-item" href="{% url 'userPanel' %}">User Panel</a></li>
+                          <li><hr class=""></li>
+                          <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
                     </li>
                     {% else %}
                     <li class="nav-item">
