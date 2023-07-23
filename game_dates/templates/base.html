@@ -41,7 +41,7 @@
                     </li>
                     {% if user.username == 'staff' %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'organiserPanel' %}">Add Event</a>
+                        <a class="nav-link" href="{% url 'organiserPanel' %}">Organiser's Panel</a>
                     </li>
                     {% endif %}
                     <li class="nav-item dropdown">
@@ -59,7 +59,7 @@
                         <a class="nav-link" href="#">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
                     {% endif %}
                 </ul>
