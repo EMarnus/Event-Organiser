@@ -8,27 +8,24 @@
         <!-- Events -->
         <div class="col-12 mt-3 left">
             <div class="row">
-                {% for post in post_list %}
+                <h1>Index Page</h1>
+                {% for appointment in appointments %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="image-container">
-                                {% if "placeholder" in post.featured_image.url %}
                                 <img class="card-img-top"
                                     src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
-                                {% else %}
-                                <img class="card-img-top" src=" {{ post.featured_image.url }}">
-                                {% endif %}
                                 <div class="image-flash">
-                                    <p class="author">Author: {{ post.author }}</p>
+                                    <p class="author">Author: {{ appointment.user }}</p>
                                 </div>
                             </div>
                             <a href="#" class="post-link">
-                                <h2 class="card-title">{{ post.title }}</h2>
-                                <p class="card-text">{{ post.event_time }}</p>
+                                <h2 class="card-title">{{ appointment.type }}</h2>
+                                <p class="card-text">{{ appointment.day }}</p>
                             </a>
                             <hr />
-                            <p class="card-text text-muted h6">{{ post.created_on }}
+                            <p class="card-text text-muted h6">{{ appointment.created_on }}
                         </div>
                     </div>
                 </div>

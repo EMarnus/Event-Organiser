@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 
+# Any Amends to choices needs to be added to templates/booking
 SERVICE_CHOICES = (
     ("Online gaming", "Online Gaming"),
     ("In person gaming", "In person gaming"),
@@ -43,10 +44,11 @@ class Appointment(models.Model):
         max_length=50, choices=SERVICE_CHOICES, default="Online gaming")
     day = models.DateField(default=datetime.now)
     time = models.CharField(
-        max_length=10, choices=TIME_CHOICES)
+        max_length=24, choices=TIME_CHOICES)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["-created_on"]

@@ -5,7 +5,13 @@ from django.contrib import messages
 
 
 def index(request):
-    return render(request, "index.html", {})
+    user = request.user
+    appointments = Appointment.objects.filter(approved=True).order_by(
+        '-created_on')
+    return render(request, "index.html", {
+        'appointments': appointments,
+        'user': user,
+    })
 
 
 def booking(request):
