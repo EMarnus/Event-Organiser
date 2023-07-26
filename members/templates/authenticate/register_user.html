@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 md-3 offset-md-2">
+      <h3>Register</h3>
+      <p>Welcome, To access or post events please register by completing the form below.</p>
+      {% if form.errors %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">There was an error with your form, please try again.
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 mt-3 offset-md-2">
+        <form action="{% url 'register_user' %}" method=POST>
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <div class="col-md-8 md-3">
+                <input type="submit" value="Submit" class="btn btn-secondary">
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
