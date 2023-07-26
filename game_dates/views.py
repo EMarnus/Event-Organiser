@@ -6,8 +6,7 @@ from django.contrib import messages
 
 def index(request):
     user = request.user
-    appointments = Appointment.objects.filter(approved=True).order_by(
-        '-created_on')
+    appointments = Appointment.objects.order_by('day')
     return render(request, "index.html", {
         'appointments': appointments,
         'user': user,

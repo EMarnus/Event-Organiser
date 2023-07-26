@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 
 def login_user(request):
@@ -16,3 +17,9 @@ def login_user(request):
 			return redirect('login')
 	else:
 		return render(request, 'authenticate/login.html', {})
+
+
+def logout_user(request):
+	logout(request)
+	messages.success(request, ("You have succesfully logged out."))
+	return redirect('index')
