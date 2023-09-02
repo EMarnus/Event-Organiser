@@ -82,6 +82,12 @@ def bookingSubmit(request):
 
         if type is not None:
             if day <= maxDate and day >= minDate:
+                AppointmentForm = Appointment.objects.get_or_create(
+                        user=user,
+                        type=type,
+                        day=day,
+                        time=time,
+                    )
                 messages.success(request, "Appointment Saved!")
                 return redirect('index')
             else:
