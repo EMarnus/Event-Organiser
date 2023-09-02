@@ -1,10 +1,10 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
-title: ''
+name: User Story template
+about: This is the default user story template
+title: 'USER STORY: <TITLE>'
 labels: ''
-assignees: ''
+assignees: EMarnus
 
 ---
 
-
+As a **role** I can **capability** so that **receive benefit**
