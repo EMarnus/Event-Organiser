@@ -46,6 +46,8 @@ class Appointment(models.Model):
     time = models.CharField(
         max_length=24, choices=TIME_CHOICES)
     updated_on = models.DateTimeField(auto_now=True)
+    description = models.CharField(
+        max_length=50, default="")
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=True)

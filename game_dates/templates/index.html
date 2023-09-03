@@ -9,25 +9,21 @@
         <div class="col-12 mt-3 left">
             <div class="row">
                 <h1>Index Page</h1>
-                {{ user }}
                 {% for appointment in appointments %}
-                {{ user }}
                 <div class="col-md-4">
-                    <div class="card mb-4">
+                    <div class="card bg-light border-light mb-4">
                         <div class="card-body">
                             <div class="image-container">
                                 <img class="card-img-top"
                                     src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
-                                <div class="image-flash">
-                                    <p class="author">Author: {{ appointment.user }}</p>
-                                </div>
                             </div>
-                            <a href="#" class="post-link">
-                                <h2 class="card-title">{{ appointment.type }}</h2>
-                                <p class="card-text">{{ appointment.day }}</p>
+                            <a href="#" class="post-link text-decoration-none text-muted">
+                                <h2 class="card-title">Description: {{ appointment.description }}</h2>
+                                <p class="card-text"> {{ appointment.type }}</p>
+                                <p class="card-text"> Type: {{ appointment.type }}</p>
+                                <p class="card-text">Date: {{ appointment.day }}</p>
+                                <p class="font-italic">Author: {{ appointment.user }}</p>
                             </a>
-                            <hr />
-                            <p class="card-text text-muted h6">{{ appointment.created_on }}
                         </div>
                     </div>
                 </div>
