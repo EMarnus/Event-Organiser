@@ -74,10 +74,11 @@ def bookingSubmit(request):
     day = request.session.get('day')
     type = request.session.get('type')
 
-    # Only show the time of the day that has not been selected before:
     hour = checkTime(times, day)
     if request.method == 'POST':
         time = request.POST.get("time")
+        description = request.POST.get("description")
+        content = request.POST.get("content")
         date = dayToWeekday(day)
 
         if type is not None:
@@ -87,6 +88,8 @@ def bookingSubmit(request):
                         type=type,
                         day=day,
                         time=time,
+                        description=description,
+                        content=content,
                     )
                 messages.success(request, "Appointment Saved!")
                 return redirect('index')
