@@ -104,10 +104,15 @@ def bookingSubmit(request):
     })
 
 
-"""
-Only show the time of the day that has not been selected before
-"""
+def bookingDetails(request, booking_id):
+    booking = Appointment.objects.get(pk=booking_id)
+    return render(request, 'bookingDetails.html', {'booking': booking})
+
+
 def checkTime(times, day):
+    """
+    Only show the time of the day that has not been selected before
+    """
     x = []
     for k in times:
         if Appointment.objects.filter(day=day, time=k).count() < 1:
@@ -118,6 +123,8 @@ def checkTime(times, day):
 """
 Loops days you want
 """
+
+
 def validWeekday(days):
     today = datetime.now()
     weekdays = []
@@ -226,6 +233,8 @@ def userUpdateSubmit(request, id):
 """
 Only show the time of the day that has not been selected before
 """
+
+
 def checkEditTime(times, day, id):
     x = []
     appointment = Appointment.objects.get(pk=id)
