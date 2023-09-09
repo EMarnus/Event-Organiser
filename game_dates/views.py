@@ -3,6 +3,33 @@ from datetime import datetime, timedelta
 from .models import *
 from django.contrib import messages
 
+times = [
+        "12 AM",
+        "1 AM",
+        "2 AM",
+        "3 AM",
+        "4 AM",
+        "5 AM",
+        "6 AM",
+        "7 AM",
+        "8 AM",
+        "9 AM",
+        "10 AM",
+        "11 AM",
+        "12 PM",
+        "1 PM",
+        "2 PM",
+        "3 PM",
+        "4 PM",
+        "5 PM",
+        "6 PM",
+        "7 PM",
+        "8 PM",
+        "9 PM",
+        "10 PM",
+        "11 PM",
+    ]
+
 
 def index(request):
     user = request.user
@@ -37,33 +64,6 @@ def booking(request):
 
 def bookingSubmit(request):
     user = request.user
-    times = [
-        "12 AM",
-        "1 AM",
-        "2 AM",
-        "3 AM",
-        "4 AM",
-        "5 AM",
-        "6 AM",
-        "7 AM",
-        "8 AM",
-        "9 AM",
-        "10 AM",
-        "11 AM",
-        "12 PM",
-        "1 PM",
-        "2 PM",
-        "3 PM",
-        "4 PM",
-        "5 PM",
-        "6 PM",
-        "7 PM",
-        "8 PM",
-        "9 PM",
-        "10 PM",
-        "11 PM",
-    ]
-
     today = datetime.now()
     minDate = today.strftime('%Y-%m-%d')
     deltatime = today + timedelta(days=21)
@@ -84,13 +84,13 @@ def bookingSubmit(request):
         if type is not None:
             if day <= maxDate and day >= minDate:
                 AppointmentForm = Appointment.objects.get_or_create(
-                        user=user,
-                        type=type,
-                        day=day,
-                        time=time,
-                        description=description,
-                        content=content,
-                    )
+                    user=user,
+                    type=type,
+                    day=day,
+                    time=time,
+                    description=description,
+                    content=content,
+                )
                 messages.success(request, "Appointment Saved!")
                 return redirect('index')
             else:
@@ -107,6 +107,11 @@ def bookingSubmit(request):
 def bookingDetails(request, booking_id):
     booking = Appointment.objects.get(pk=booking_id)
     return render(request, 'bookingDetails.html', {'booking': booking})
+
+
+def bookingUpdate(request, booking_id):
+    booking = Appointment.objects.get(pk=booking_id)
+    return render(request, 'bookingUpdate.html', {'booking': booking})
 
 
 def checkTime(times, day):
@@ -150,7 +155,7 @@ def userPanel(request):
     })
 
 
-def userUpdate(request, id):
+def bookingUpdate(request, id):
     appointment = Appointment.objects.get(pk=id)
     userdatepicked = appointment.day
     # Copy  booking:
@@ -173,22 +178,18 @@ def userUpdate(request, id):
 
         return redirect('userUpdateSubmit', id=id)
 
-    return render(request, 'userUpdate.html', {
+    return render(request, 'bookingUpdateSubmit.html', {
             'validateWeekdays': validateWeekdays,
             'delta24': delta24,
             'id': id,
         })
 
 
-def userUpdateSubmit(request, id):
+def bookingUpdateSubmit(request, id):
     user = request.user
-    times = [
-        "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM",
-        "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
-    ]
     today = datetime.now()
     minDate = today.strftime('%Y-%m-%d')
-    deltatime = today + timedelta(days=21)
+    deltatime = today + timedelta(days=31)
     strdeltatime = deltatime.strftime('%Y-%m-%d')
     maxDate = strdeltatime
 
@@ -203,28 +204,26 @@ def userUpdateSubmit(request, id):
         time = request.POST.get("time")
         date = dayToWeekday(day)
 
-        if service is not None:
+        if type is not None:
             if day <= maxDate and day >= minDate:
-                if Appointment.objects.filter(day=day, time=time).count() < 1 or userSelectedTime == time:
-                    AppointmentForm = Appointment.objects.filter(pk=id).update(
-                        user=user,
-                        service=service,
-                        day=day,
-                        time=time,
-                    )
-                    messages.success(request, "Appointment Edited!")
-                    return redirect('index')
-                else:
-                    messages.success(
-                        request, "The Selected Time Has Been Reserved Before!")
+                AppointmentForm = Appointment.objects.get_or_create(
+                    user=user,
+                    type=type,
+                    day=day,
+                    time=time,
+                    description=description,
+                    content=content,
+                )
+                messages.success(request, "Appointment Saved!")
+                return redirect('index')
             else:
                 messages.success(
                     request, "The Selected Date Isn't In The Correct Time Period!")
         else:
-            messages.success(request, "Please Select A Service!")
-        return redirect('userPanel')
+            messages.success(request, "Please Select A Type!")
+        return redirect('postDetails')
 
-    return render(request, 'userUpdateSubmit.html', {
+    return render(request, 'bookingUpdateSubmit.html', {
         'times': hour,
         'id': id,
     })
