@@ -28,7 +28,7 @@
                             <div>
                             <a href="{% url 'bookingDetails' appointment.id %}" class="btn btn-secondary">View Details</a>
                             <a href="{% url 'bookingUpdate' appointment.id %}" class="btn btn-info">Edit Details</a>
-                            <a href="#" class="btn btn-danger">Delete</a><!-- Add confirmation, defensive -->
+                            <a href="{% url 'bookingDelete' appointment.id %}" class="btn btn-danger">Delete</a><!-- Add confirmation, defensive -->
                             {% endif %}
                             </div>
                         </div>

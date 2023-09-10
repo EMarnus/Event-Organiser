@@ -229,6 +229,13 @@ def bookingUpdateSubmit(request, booking_id):
     })
 
 
+def bookingDelete(request, booking_id):
+    booking = Appointment.objects.get(pk=booking_id)
+    booking.delete()
+    messages.success(request, "Event deleted!")
+    return redirect('index')
+
+
 def checkEditTime(times, day, booking_id):
     x = []
     appointment = Appointment.objects.get(pk=booking_id)
