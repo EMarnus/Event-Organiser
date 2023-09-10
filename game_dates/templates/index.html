@@ -27,8 +27,10 @@
                             {% if user.is_authenticated  %}
                             <div>
                             <a href="{% url 'bookingDetails' appointment.id %}" class="btn btn-secondary">View Details</a>
+                            {% if user == appointment.user %}
                             <a href="{% url 'bookingUpdate' appointment.id %}" class="btn btn-info">Edit Details</a>
                             <a href="{% url 'bookingDelete' appointment.id %}" class="btn btn-danger">Delete</a><!-- Add confirmation, defensive -->
+                            {% endif %}
                             {% endif %}
                             </div>
                         </div>

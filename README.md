@@ -66,6 +66,7 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 - Updating Events broke after adding previously submitted dates as default. 
 - Pagination doesn't work, just keeps flowing down.
 - The desctiption on booking-submit is not dynamic depending on type selected.
+- When not logged it, colums do not display correctly on homepage
 
 
 ### Fixed Bugs
