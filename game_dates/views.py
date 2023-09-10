@@ -66,7 +66,7 @@ def bookingSubmit(request):
     user = request.user
     today = datetime.now()
     minDate = today.strftime('%Y-%m-%d')
-    deltatime = today + timedelta(days=21)
+    deltatime = today + timedelta(days=30)
     strdeltatime = deltatime.strftime('%Y-%m-%d')
     maxDate = strdeltatime
 
@@ -107,11 +107,6 @@ def bookingSubmit(request):
 def bookingDetails(request, booking_id):
     booking = Appointment.objects.get(pk=booking_id)
     return render(request, 'bookingDetails.html', {'booking': booking})
-
-
-def bookingUpdate(request, booking_id):
-    booking = Appointment.objects.get(pk=booking_id)
-    return render(request, 'bookingUpdate.html', {'booking': booking})
 
 
 def checkTime(times, day):
@@ -155,9 +150,10 @@ def userPanel(request):
     })
 
 
-def bookingUpdate(request, id):
-    appointment = Appointment.objects.get(pk=id)
-    userdatepicked = appointment.day
+def bookingUpdate(request, booking_id):
+    booking = Appointment.objects.get(pk=booking_id)
+    booking_id = booking.pk
+    userdatepicked = booking.day
     # Copy  booking:
     today = datetime.today()
     minDate = today.strftime('%Y-%m-%d')
@@ -169,50 +165,52 @@ def bookingUpdate(request, id):
     validateWeekdays = validWeekday(31)
 
     if request.method == 'POST':
-        service = request.POST.get('service')
+        type = request.POST.get('type')
         day = request.POST.get('day')
 
-        # Store day and service in django session:
+        # Store in django session:
         request.session['day'] = day
-        request.session['service'] = service
+        request.session['type'] = type
+        request.session['booking_id'] = booking_id
 
-        return redirect('userUpdateSubmit', id=id)
+        return redirect('bookingUpdateSubmit',  booking_id)
 
-    return render(request, 'bookingUpdateSubmit.html', {
+    return render(request, 'bookingUpdate.html', {
             'validateWeekdays': validateWeekdays,
             'delta24': delta24,
-            'id': id,
+            'booking_id': booking_id,
+            'booking': booking
         })
 
 
-def bookingUpdateSubmit(request, id):
+def bookingUpdateSubmit(request, booking_id):
+    booking = Appointment.objects.get(pk=booking_id)
     user = request.user
     today = datetime.now()
     minDate = today.strftime('%Y-%m-%d')
-    deltatime = today + timedelta(days=31)
+    deltatime = today + timedelta(days=30)
     strdeltatime = deltatime.strftime('%Y-%m-%d')
     maxDate = strdeltatime
 
     day = request.session.get('day')
-    service = request.session.get('service')
+    type = request.session.get('type')
+    booking_id = request.session.get('booking_id')
 
-    # Only show the time of the day that has not been selected before and the time he is editing:
-    hour = checkEditTime(times, day, id)
-    appointment = Appointment.objects.get(pk=id)
-    userSelectedTime = appointment.time
+    hour = checkEditTime(times, day, booking_id)
     if request.method == 'POST':
         time = request.POST.get("time")
         date = dayToWeekday(day)
 
         if type is not None:
             if day <= maxDate and day >= minDate:
-                AppointmentForm = Appointment.objects.get_or_create(
-                    user=user,
-                    type=type,
-                    day=day,
-                    time=time,
-                    description=description,
-                    content=content,
+                AppointmentForm = Appointment.objects.filter(
+                    pk=booking_id).update(
+                        user=user,
+                        type=type,
+                        day=day,
+                        time=time,
+                        description=description,
+                        content=content,
                 )
                 messages.success(request, "Appointment Saved!")
                 return redirect('index')
@@ -224,24 +222,43 @@ def bookingUpdateSubmit(request, id):
         return redirect('postDetails')
 
     return render(request, 'bookingUpdateSubmit.html', {
+        'booking_id': booking_id,
         'times': hour,
-        'id': id,
+        'booking': booking,
     })
 
 
-"""
-Only show the time of the day that has not been selected before
-"""
-
-
-def checkEditTime(times, day, id):
+def checkEditTime(times, day, booking_id):
     x = []
-    appointment = Appointment.objects.get(pk=id)
+    appointment = Appointment.objects.get(pk=booking_id)
     time = appointment.time
     for k in times:
         if Appointment.objects.filter(day=day, time=k).count() < 1 or time == k:
             x.append(k)
     return x
+
+
+def userUpdate(request, id):
+    appointment = Appointment.objects.get(pk=id)
+    userdatepicked = appointment.day
+    #Copy  booking:
+    today = datetime.today()
+    minDate = today.strftime('%Y-%m-%d')
+
+    #24h if statement in template:
+    delta24 = (userdatepicked).strftime('%Y-%m-%d') >= (today + timedelta(days=1)).strftime('%Y-%m-%d')
+    #Calling 'validWeekday' Function to Loop days you want in the next 21 days:
+    weekdays = validWeekday(22)
+
+    #Only show the days that are not full:
+    validateWeekdays = isWeekdayValid(weekdays)
+    
+    return render(request, 'userUpdate.html', {
+            'weekdays':weekdays,
+            'validateWeekdays':validateWeekdays,
+            'delta24': delta24,
+            'id': id,
+        })
 
 
 def organiserPanel(request):
