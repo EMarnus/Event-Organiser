@@ -62,18 +62,15 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
       - Largest function has 22 statements in it, while the median is 2.5.
       - The most complex function has a cyclomatic complexity value of 11 while the median is 1.
 
-### Fixed Bugs
-- Changed name to input to prevent unwanted characters being used.
-- The background doesn't cover entire screen on some devices. 
-- Hover animation moved the buttons.
-- Original import of json files did not work on Firefox, rewrote to use fetch API. Sean Young helped parts of this.
-- Can brute force correct answer.
-- Can submit correct answer multiple times and increase score.
-- Can break game by deselecting all from checkbox
-- Can get to end of game with NaN as score.
-
 ### Unfixed Bugs
+- Updating Events broke after adding previously submitted dates as default. 
+- Pagination doesn't work, just keeps flowing down.
+- The desctiption on booking-submit is not dynamic depending on type selected.
 
+
+### Fixed Bugs
+- 
+- 
 
 
 ## Deployment
