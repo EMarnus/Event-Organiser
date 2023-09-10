@@ -12,6 +12,9 @@
         <div>
             <h3 class="">Select Service:</h3>
             <select class="form-select fs-3" name="type">
+                <option value="{{ booking.type }}" selected >
+                    {{ booking.type }}
+                </option>
                 <option value="Online gaming">Online gaming</option>
                 <option value="In person gaming">In person gaming</option>
                 <option value="Watch party">Watch party</option>

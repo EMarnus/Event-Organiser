@@ -79,7 +79,6 @@ def bookingSubmit(request):
         time = request.POST.get("time")
         description = request.POST.get("description")
         content = request.POST.get("content")
-        date = dayToWeekday(day)
 
         if type is not None:
             if day <= maxDate and day >= minDate:
@@ -200,6 +199,8 @@ def bookingUpdateSubmit(request, booking_id):
     if request.method == 'POST':
         time = request.POST.get("time")
         date = dayToWeekday(day)
+        description = request.POST.get("description")
+        content = request.POST.get("content")
 
         if type is not None:
             if day <= maxDate and day >= minDate:
@@ -212,7 +213,7 @@ def bookingUpdateSubmit(request, booking_id):
                         description=description,
                         content=content,
                 )
-                messages.success(request, "Appointment Saved!")
+                messages.success(request, "Appointment Updated!")
                 return redirect('index')
             else:
                 messages.success(

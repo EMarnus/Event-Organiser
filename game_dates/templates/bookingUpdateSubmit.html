@@ -12,6 +12,9 @@
         <h3 class="text-center mt-4">Time:</h3>
         <div>
             <select class="form-select fs-3 text-center" name="time">
+                <option value="{{ booking.type }}" selected >
+                    {{ booking.time }}
+                </option>
                 {% for time in times %}
                 <option value="{{time}}">{{time}}</option>
                 {% endfor %}
@@ -21,13 +24,13 @@
         <!--input Game Name-->
         <div class="form-group">
             <label for="GameName"><h3 class="text-center mt-4">Game: *</h3></label>
-            <textarea class="form-control" id="GameName" rows="1" name="description" placeholder="{{ booking.description }}" required></textarea>
+            <textarea class="form-control" id="GameName" rows="1" name="description" required>{{ booking.description }}</textarea>
         </div>
 
         <!--input Content-->
         <div class="form-group">
             <label for="content"><h3 class="text-center mt-4">Description: *</h3></label>
-            <textarea class="form-control" id="content" rows="3" name="content" placeholder="{{ booking.content }}" required></textarea>
+            <textarea class="form-control" id="content" rows="3" name="content" required>{{ booking.content }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-secondary mt-3">Update Event</button>
