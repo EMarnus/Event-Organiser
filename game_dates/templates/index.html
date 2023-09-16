@@ -8,7 +8,6 @@
         <!-- Events -->
         <div class="col-12 mt-3 left">
             <div class="row">
-                <h1>Index Page</h1>
                 {% for appointment in appointments %}
                 <div class="col-md-4">
                     <div class="card bg-light border-light mb-4">
@@ -31,17 +30,16 @@
                             <a href="{% url 'bookingUpdate' appointment.id %}" class="btn btn-info">Edit Details</a>
                             <a href="{% url 'bookingDelete' appointment.id %}" class="btn btn-danger">Delete</a><!-- Add confirmation, defensive -->
                             {% endif %}
-                            {% endif %}
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 {% if forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="row">
+                    <div>
+                        <div class="row">
                 {% endif %}
                 {% endfor %}
-
             </div>
         </div>
     </div>
@@ -54,7 +52,6 @@
             {% endif %}
             {% if page_obj.has_next %}
             <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
             {% endif %}
         </ul>
     </nav>
