@@ -52,11 +52,11 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 - Updating Events broke after adding previously submitted dates as default. 
 - Pagination doesn't work, just keeps flowing down.
 - The desctiption on booking-submit is not dynamic depending on type selected.
-- When not logged it, colums do not display correctly on homepage
+- 
 
 
 ### Fixed Bugs
-- 
+- When not logged it, colums do not display correctly on homepage, fixed with [Commit](https://github.com/EMarnus/PP4-Redo/commit/8f04d5038b0b07338a8e9da65b9a83187e89506f?diff=split)
 - 
 
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
 from .models import *
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 times = [
         "12 AM",
@@ -33,10 +34,19 @@ times = [
 
 def index(request):
     user = request.user
-    appointments = Appointment.objects.order_by('day')
+    appointments = Appointment.objects.all().order_by('day')
+
+    # Paginator
+    paginator = Paginator(appointments, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    nums = "a" * page_obj.paginator.num_pages
+
     return render(request, "index.html", {
         'appointments': appointments,
         'user': user,
+        'page_obj': page_obj,
+        'nums': nums,
     })
 
 
