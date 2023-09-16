@@ -37,7 +37,7 @@ def index(request):
     appointments = Appointment.objects.all().order_by('day')
 
     # Paginator
-    paginator = Paginator(appointments, 3)
+    paginator = Paginator(appointments, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     nums = "a" * page_obj.paginator.num_pages
@@ -263,16 +263,16 @@ def checkEditTime(times, day, booking_id):
 def userUpdate(request, id):
     appointment = Appointment.objects.get(pk=id)
     userdatepicked = appointment.day
-    #Copy  booking:
+    # Copy booking:
     today = datetime.today()
     minDate = today.strftime('%Y-%m-%d')
 
-    #24h if statement in template:
+    # 24h if statement in template:
     delta24 = (userdatepicked).strftime('%Y-%m-%d') >= (today + timedelta(days=1)).strftime('%Y-%m-%d')
-    #Calling 'validWeekday' Function to Loop days you want in the next 21 days:
+    # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
     weekdays = validWeekday(22)
 
-    #Only show the days that are not full:
+    # Only show the days that are not full:
     validateWeekdays = isWeekdayValid(weekdays)
     
     return render(request, 'userUpdate.html', {

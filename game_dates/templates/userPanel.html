@@ -7,8 +7,8 @@
 <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
     <h2 class="">User Info:</h2>
     <ul class="list-group fs-4 mt-3">
-            <li class="list-group mt-2">First Name: {{ user.first_name }}</li>
-            <li class="list-group mt-2">Last Name: {{ user.last_name }}</li>
+            <!-- <li class="list-group mt-2">First Name: {{ user.first_name }}</li> -->
+            <!-- <li class="list-group mt-2">Last Name: {{ user.last_name }}</li> -->
             <li class="list-group mt-2">Username: {{ user.username }}</li>
     </ul>
 </div>
@@ -25,6 +25,8 @@
             <p class="list-group mt-2">Service: {{ appointment.service }}</p>
             <div class="mt-3 mb-2">
                 <a class="btn btn-secondary rounded-3 p-2" href="{% url 'bookingUpdate' appointment.id %}">Edit Appointment</a>
+                <a href="{% url 'bookingUpdate' appointment.id %}" class="btn btn-info">Edit Details</a>
+                <a href="{% url 'bookingDelete' appointment.id %}" class="btn btn-danger">Delete</a>
             </div>
         </div>
         {% endfor %}
