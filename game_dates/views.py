@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
 from .models import *
+from .forms import CommentForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 
@@ -42,7 +43,7 @@ def index(request):
     page_obj = paginator.get_page(page_number)
     nums = "a" * page_obj.paginator.num_pages
 
-    return render(request, "index.html", {
+    return render(request, 'index.html', {
         'appointments': appointments,
         'user': user,
         'page_obj': page_obj,
@@ -86,9 +87,9 @@ def bookingSubmit(request):
 
     hour = checkTime(times, day)
     if request.method == 'POST':
-        time = request.POST.get("time")
-        description = request.POST.get("description")
-        content = request.POST.get("content")
+        time = request.POST.get('time')
+        description = request.POST.get('description')
+        content = request.POST.get('content')
 
         if type is not None:
             if day <= maxDate and day >= minDate:
@@ -115,7 +116,28 @@ def bookingSubmit(request):
 
 def bookingDetails(request, booking_id):
     booking = Appointment.objects.get(pk=booking_id)
-    return render(request, 'bookingDetails.html', {'booking': booking})
+    comments = booking.comments.filter(approved=True).order_by('created_on')
+
+    new_comment = None
+
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.name = request.user
+            new_comment.post = Appointment.objects.get(id=booking_id)
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'bookingDetails.html', {
+        'booking': booking,
+        'comments': comments,
+        'comment_form': comment_form
+        })
 
 
 def checkTime(times, day):
@@ -145,7 +167,7 @@ def validWeekday(days):
 
 
 def dayToWeekday(x):
-    z = datetime.strptime(x, "%Y-%m-%d")
+    z = datetime.strptime(x, '%Y-%m-%d')
     y = z.strftime('%A')
 
 
@@ -207,10 +229,10 @@ def bookingUpdateSubmit(request, booking_id):
 
     hour = checkEditTime(times, day, booking_id)
     if request.method == 'POST':
-        time = request.POST.get("time")
+        time = request.POST.get('time')
         date = dayToWeekday(day)
-        description = request.POST.get("description")
-        content = request.POST.get("content")
+        description = request.POST.get('description')
+        content = request.POST.get('content')
 
         if type is not None:
             if day <= maxDate and day >= minDate:
@@ -274,10 +296,10 @@ def userUpdate(request, id):
 
     # Only show the days that are not full:
     validateWeekdays = isWeekdayValid(weekdays)
-    
+
     return render(request, 'userUpdate.html', {
-            'weekdays':weekdays,
-            'validateWeekdays':validateWeekdays,
+            'weekdays': weekdays,
+            'validateWeekdays': validateWeekdays,
             'delta24': delta24,
             'id': id,
         })

@@ -73,6 +73,10 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 - Can Sucullu - Mentor at Code Institute
 - Codemy.com - [Django Wednesdays Playlist](https://bit.ly/35Xo9jD)
 - CI's I think Therefore I Blog - Used project as a base template for my site
+- Comment system built using  
+[djangocentral.com](https://djangocentral.com/creating-comments-system-with-django/#building-comment-model)
+[CodingEntrepreneurs ](https://www.youtube.com/watch?v=rKXVuG4axTg)
+And help from Sean, Code Institute Tutor.
 
 ### Content 
 

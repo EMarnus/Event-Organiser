@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-
 {% block content %}
+{% load crispy_forms_tags %}
+
 {% if user.is_authenticated %}
 
 <h1 class="text-center  mt-3">{{ booking.description }}</h1>
-
+<!-- Body -->
 <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
     <div class="">
         <div class="container">
@@ -17,6 +18,45 @@
                 </div>
                 <div class="d-none d-md-block col-md-6 masthead-image">
                     <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Comments -->
+<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 card mb-4  mt-3 ">
+                <h3>Comments:</h3>
+                <div class="card-body">
+                    {% for comment in comments %}
+                    <div class="comments" style="padding: 10px;">
+                        <p class="font-weight-bold">
+                            {{ comment.name }}
+                            <span class=" text-muted font-weight-normal">
+                                {{ comment.created_on }}
+                            </span> wrote:
+                        </p>
+                        {{  comment.body | linebreaks }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-4 card mb-4  mt-3 ">
+                <div class="card-body">
+                    {% if new_comment %}
+                    <div class="alert alert-success" role="alert">
+                        Your comment is awaiting approval
+                    </div>
+                    {% else %}  
+                    <h3>Leave a comment:</h3>
+                    <form method="post" style="margin-top: 1.3em;">
+                        {{ comment_form.as_p }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
