@@ -2,13 +2,25 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+
 <h1 class="text-center  mt-3">{{ booking.description }}</h1>
 
 <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
-    {{ booking.user }}<br/>
-    {{ booking.description }}<br/>
-    {{ booking.day }}<br/>
-    {{ booking.time }}<br/>
+    <div class="">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-6 ">
+                    <h2 class="">{{ booking.description }}</h2>
+                    <p class="">Organised by {{ booking.user }} for {{ booking.created_on }}</p>
+                    <p class="">Where "it will take place": {{ booking.type }}</p>
+                    <p class=""><strong>Additonal Details:</strong> {{ booking.content }}</p>
+                </div>
+                <div class="d-none d-md-block col-md-6 masthead-image">
+                    <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% else %}

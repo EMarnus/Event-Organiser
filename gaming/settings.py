@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['8000-emarnus-pp4redo-25i7snoj67l.ws-eu104.gitpod.io', 'bar-match-bookings-site-929e26b7b02a.herokuapp.com', 'local']
 

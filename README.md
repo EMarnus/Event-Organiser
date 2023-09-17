@@ -36,7 +36,7 @@ The objective of this is to provide a simple site to try to organise gaming even
 
 ## Testing 
 
-Ongoing testing on Chrome as features were added. Additional Testing was done desktop Edge, Firefox & Mobile Chrome. Manual testing was done for edge cases, that is how infinite score, no checkbox selected and reset game bugs were found.
+Ongoing testing on Chrome as features were added. Additional Testing was done desktop Edge, Firefox & Mobile Chrome. Manual testing was done following this checklist [Checklist](#).
 
 [Incognito Lighthouse](#)
 
@@ -49,14 +49,14 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 
 
 ### Unfixed Bugs
-- Updating Events broke after adding previously submitted dates as default. 
-- Pagination doesn't work, just keeps flowing down.
+- Updating Events broke after adding previously submitted dates as default.  
 - The desctiption on booking-submit is not dynamic depending on type selected.
 - 
 
 
 ### Fixed Bugs
 - When not logged it, colums do not display correctly on homepage, fixed with [Commit](https://github.com/EMarnus/PP4-Redo/commit/8f04d5038b0b07338a8e9da65b9a83187e89506f?diff=split)
+- Pagination doesn't work, just keeps flowing down. [Commit](https://github.com/EMarnus/PP4-Redo/commit/34cf80bb00148e4965a48b059a2a1252377f4600)
 - 
 
 
