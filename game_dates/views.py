@@ -122,7 +122,6 @@ def bookingDetails(request, booking_id):
     comments = booking.comments.filter(approved=True).order_by('created_on')
     attending = booking.number_of_attendees()
 
-
     new_comment = None
 
     if request.method == 'POST':
@@ -148,7 +147,12 @@ def bookingDetails(request, booking_id):
 
 def attendingEvent(request, booking_id):
     event = get_object_or_404(Appointment, id=request.POST.get('booking_id'))
-    event.attending.add(request.user)
+
+    if event.attending.filter(id=request.user.id).exists():
+        event.attending.remove(request.user)
+    else:
+        event.attending.add(request.user)
+
     return HttpResponseRedirect(
         reverse('bookingDetails', args=[str(booking_id)]))
 
