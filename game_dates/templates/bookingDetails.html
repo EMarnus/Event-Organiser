@@ -28,22 +28,36 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 card mb-4  mt-3 ">
-                <h3 class="my-4">Mark attending status:</h3>
+                <h3 class="card-title mt-4">Mark attending status:</h3>
                 <div class="card-body">
-                <!-- Attending/Tentative indicators -->
-                    <form class="d-inline my-4" action="{% url 'attending' booking.id %}" method="POST">
-                        {% csrf_token %}
-                        {% if attending %}
-                        <button type="submit" name="booking_id" value="{{booking.id}}" class="btn btn-outline-secondary"><i class="fa-solid fa-square-check"></i> Attending</button>
-                        {% else %}
-                        <button type="submit" name="booking_id" value="{{booking.id}}" class="btn btn-outline-secondary"><i class="fa-regular fa-square-check"></i> Not Marked as Attending</button>
-                        {% endif %}
-                    </form>
+                    <p>People attending: {{ attending }}</p>
+                    <p>Might attend: {{ tentative }}</p>
+                    <!-- Attendance Buttons -->
+                    <div class="row">
+                        <form class="d-inline mt-4" action="{% url 'attending' booking.id %}" method="POST">
+                            {% csrf_token %}
+                            {% if attending %}
+                            <button type="submit" name="booking_id" value="{{booking.id}}" class="btn btn-outline-secondary"><i class="fa-solid fa-square-check"></i> Attending</button>
+                            {% elif not tentative %}
+                            <button type="submit" name="booking_id" value="{{booking.id}}" class="btn btn-outline-secondary"><i class="fa-regular fa-square-check"></i> Not Marked as Attending</button>
+                            {% endif %}
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form class="d-inline mt-4" action="{% url 'tentative' booking.id %}" method="POST">
+                            {% csrf_token %}
+                            {% if tentative %}
+                            <button type="submit" name="booking_id" value="{{booking.id}}" class="btn btn-outline-secondary"><i class="fa-solid fa-hand"></i> Might be attending</button>
+                            {% elif not attending %}
+                            <button type="submit" name="booking_id" value="{{booking.id}}" class="btn btn-outline-secondary"><i class="fa-regular fa-hand"></i> Not Attending</button>
+                            {% endif %}
+                        </form>
+                    </div>
                 </div>
             </div>
             <!-- Comments -->
             <div class="col-md-4 card mb-4  mt-3 ">
-                <h3 class="my-4">Comments:</h3>
+                <h3 class="card-title mt-4">Comments:</h3>
                 <div class="card-body">
                     {% for comment in comments %}
                     <div class="comments">
@@ -60,7 +74,7 @@
             </div>
             <!-- Adding Comments -->
             <div class="col-md-4 card mb-4  mt-3 ">
-                <h3 class="my-4">Leave a comment:</h3>
+                <h3 class="card-title mt-4">Leave a comment:</h3>
                 <div class="card-body">
                     {% if new_comment %}
                     <div class="alert alert-success" role="alert">

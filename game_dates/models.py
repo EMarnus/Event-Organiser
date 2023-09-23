@@ -53,6 +53,8 @@ class Appointment(models.Model):
     approved = models.BooleanField(default=True)
     attending = models.ManyToManyField(
         User, related_name='event_attending', blank=True)
+    tentative = models.ManyToManyField(
+        User, related_name='event_tentative', blank=True)
 
     class Meta:
         ordering = ["-created_on"]

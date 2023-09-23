@@ -121,6 +121,7 @@ def bookingDetails(request, booking_id):
     booking = Appointment.objects.get(pk=booking_id)
     comments = booking.comments.filter(approved=True).order_by('created_on')
     attending = booking.number_of_attendees()
+    tentative = booking.number_of_tentative()
 
     new_comment = None
 
@@ -141,7 +142,8 @@ def bookingDetails(request, booking_id):
         'booking': booking,
         'comments': comments,
         'comment_form': comment_form,
-        'attending': attending
+        'attending': attending,
+        'tentative': tentative,
         })
 
 
@@ -152,6 +154,18 @@ def attendingEvent(request, booking_id):
         event.attending.remove(request.user)
     else:
         event.attending.add(request.user)
+
+    return HttpResponseRedirect(
+        reverse('bookingDetails', args=[str(booking_id)]))
+
+
+def tentativeEvent(request, booking_id):
+    event = get_object_or_404(Appointment, id=request.POST.get('booking_id'))
+
+    if event.tentative.filter(id=request.user.id).exists():
+        event.tentative.remove(request.user)
+    else:
+        event.tentative.add(request.user)
 
     return HttpResponseRedirect(
         reverse('bookingDetails', args=[str(booking_id)]))
