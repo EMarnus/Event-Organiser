@@ -5,13 +5,13 @@
 {% if user.is_authenticated %}
 
 <h1 class="text-center  mt-3">{{ booking.description }}</h1>
-<!-- Body -->
+<!-- Upper Secion -->
 <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
     <div class="">
         <div class="container">
             <div class="row g-0">
                 <div class="col-md-6 ">
-                    <h2 class="">{{ booking.description }}</h2>
+                    <h2 class="">{{ booking.description }} - Attending: {{ attending }}</h2>
                     <p class="">Organised by {{ booking.user }} for {{ booking.created_on }}</p>
                     <p class="">Where "it will take place": {{ booking.type }}</p>
                     <p class=""><strong>Additonal Details:</strong> {{ booking.content }}</p>
@@ -23,15 +23,30 @@
         </div>
     </div>
 </div>
-<!-- Comments -->
+<!-- Lower Secion -->
 <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 card mb-4  mt-3 ">
-                <h3>Comments:</h3>
+            <div class="col-md-4 card mb-4  mt-3 ">
+                <h3 class="my-4">Mark attending status:</h3>
+                <div class="card-body">
+                <!-- Attending/Tentative indicators -->
+                    <form class="d-inline my-4" action="{% url 'attending' booking.id %}" method="POST">
+                        {% csrf_token %}
+                        {% if attending %}
+                        <button type="submit" name="booking_id" value="{{booking.id}}" class="btn btn-outline-secondary"><i class="fa-solid fa-square-check"></i> Attending</button>
+                        {% else %}
+                        <button type="submit" name="booking_id" value="{{booking.id}}" class="btn btn-outline-secondary"><i class="fa-regular fa-square-check"></i> Not Marked as Attending</button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            <!-- Comments -->
+            <div class="col-md-4 card mb-4  mt-3 ">
+                <h3 class="my-4">Comments:</h3>
                 <div class="card-body">
                     {% for comment in comments %}
-                    <div class="comments" style="padding: 10px;">
+                    <div class="comments">
                         <p class="font-weight-bold">
                             {{ comment.name }}
                             <span class=" text-muted font-weight-normal">
@@ -43,44 +58,27 @@
                     {% endfor %}
                 </div>
             </div>
+            <!-- Adding Comments -->
             <div class="col-md-4 card mb-4  mt-3 ">
+                <h3 class="my-4">Leave a comment:</h3>
                 <div class="card-body">
                     {% if new_comment %}
                     <div class="alert alert-success" role="alert">
                         Your comment is awaiting approval
                     </div>
                     {% else %}  
-                    <h3>Leave a comment:</h3>
-                    <form method="post" style="margin-top: 1.3em;">
-                        {{ comment_form.as_p }}
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-                    </form>
+                    <div class="form-group">
+                        <form method="post">
+                            {{ comment_form.as_p }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary">Submit</button>
+                        </form>
+                    </div>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Attending/Tentative indicators -->
-<div class="col-1">
-    <strong>
-        {% if user.is_authenticated %}
-        <form class="d-inline" action="{% url 'attending' booking.id %}" method="POST">
-            {% csrf_token %}
-            {% if attending %}
-            <button type="submit" name="booking_id" value="{{booking.id}}" class="btn-like"><i class="fa-solid fa-square-check"></i> Attending</button>
-            {% else %}
-            <button type="submit" name="booking_id" value="{{booking.id}}" class="btn-like"><i class="fa-regular fa-square-check"></i> Not Marked as Attending</button>
-            {% endif %}
-        </form>
-        {% else %}
-        <span class="text-secondary"><i class="far fa-heart"></i></span>
-        {% endif %}
-    <!-- The number of likes goes before the closing strong tag -->
-    <span class="text-secondary">Marked Attending: {{ attending }} </span>
-    </strong>
 </div>
 
 {% else %}
