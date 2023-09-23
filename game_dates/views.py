@@ -1,5 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, timedelta
+from django.views import generic, View
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import *
 from .forms import CommentForm
 from django.contrib import messages
@@ -117,6 +120,8 @@ def bookingSubmit(request):
 def bookingDetails(request, booking_id):
     booking = Appointment.objects.get(pk=booking_id)
     comments = booking.comments.filter(approved=True).order_by('created_on')
+    attending = booking.number_of_attendees()
+
 
     new_comment = None
 
@@ -136,8 +141,16 @@ def bookingDetails(request, booking_id):
     return render(request, 'bookingDetails.html', {
         'booking': booking,
         'comments': comments,
-        'comment_form': comment_form
+        'comment_form': comment_form,
+        'attending': attending
         })
+
+
+def attendingEvent(request, booking_id):
+    event = get_object_or_404(Appointment, id=request.POST.get('booking_id'))
+    event.attending.add(request.user)
+    return HttpResponseRedirect(
+        reverse('bookingDetails', args=[str(booking_id)]))
 
 
 def checkTime(times, day):

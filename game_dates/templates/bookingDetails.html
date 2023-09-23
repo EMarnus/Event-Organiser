@@ -63,6 +63,26 @@
     </div>
 </div>
 
+<!-- Attending/Tentative indicators -->
+<div class="col-1">
+    <strong>
+        {% if user.is_authenticated %}
+        <form class="d-inline" action="{% url 'attending' booking.id %}" method="POST">
+            {% csrf_token %}
+            {% if attending %}
+            <button type="submit" name="booking_id" value="{{booking.id}}" class="btn-like"><i class="fa-solid fa-square-check"></i> Attending</button>
+            {% else %}
+            <button type="submit" name="booking_id" value="{{booking.id}}" class="btn-like"><i class="fa-regular fa-square-check"></i> Not Marked as Attending</button>
+            {% endif %}
+        </form>
+        {% else %}
+        <span class="text-secondary"><i class="far fa-heart"></i></span>
+        {% endif %}
+    <!-- The number of likes goes before the closing strong tag -->
+    <span class="text-secondary">Marked Attending: {{ attending }} </span>
+    </strong>
+</div>
+
 {% else %}
 
 <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">

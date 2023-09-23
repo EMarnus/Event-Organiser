@@ -51,12 +51,20 @@ class Appointment(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=True)
+    attending = models.ManyToManyField(
+        User, related_name='event_attending', blank=True)
 
     class Meta:
         ordering = ["-created_on"]
 
     def __str__(self):
         return f"{self.user.username} | day: {self.day} | time: {self.time}"
+
+    def number_of_attendees(self):
+        return self.attending.count()
+
+    def number_of_tentative(self):
+        return self.tentative.count()
 
 
 class Comment(models.Model):
