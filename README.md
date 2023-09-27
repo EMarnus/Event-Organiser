@@ -1,9 +1,15 @@
-# Create an event
+# 21 MID Event Organiser
+
+![AM I Responsive images](assets/readme)
 
 ### [Live Website](https://bar-match-bookings-site-929e26b7b02a.herokuapp.com/)
 
 A community wesite to organise gaming events/times.  
-The objective of this is to provide a simple site to try to organise gaming events among friends. These days it's difficult to get my gaming group together to play something as we all have resposibilities this is an attempt to make getting together easier.    
+The objective of this is to provide a simple site to try to organise gaming events among friends. These days it's difficult to get my gaming group together to play something as we all have resposibilities this is an attempt to make getting together easier.
+
+
+## Table of Contents
+
 
 [Features/Planning Board](https://github.com/users/EMarnus/projects/4/views/1)  
 [Initial Mockup](#)  
@@ -36,7 +42,7 @@ The objective of this is to provide a simple site to try to organise gaming even
 
 ## Testing 
 
-Ongoing testing on Chrome as features were added. Additional Testing was done desktop Edge, Firefox & Mobile Chrome. Manual testing was done following this checklist [Checklist](#).
+Ongoing testing on Chrome as features were added. Additional Testing was done desktop Edge, Firefox & Mobile Chrome. Manual testing was done following this checklist [Checklist](https://docs.google.com/spreadsheets/d/1UXtTze1940aCpoY0gpDi4OD64AhHgHELo6on6-MYtAA/edit?usp=sharing).
 
 [Incognito Lighthouse](#)
 
