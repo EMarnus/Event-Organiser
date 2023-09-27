@@ -297,10 +297,10 @@ def bookingDelete(request, booking_id):
     if booking.user == request.user:
         booking.delete()
         messages.success(request, "Event deleted!")
-        return redirect('index')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         messages.error(request, "You do not have permission to delete this Event")
-        return redirect('index')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def checkEditTime(times, day, booking_id):
