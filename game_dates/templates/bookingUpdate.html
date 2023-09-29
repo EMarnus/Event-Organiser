@@ -3,7 +3,7 @@
 {% block content %}
 {% if user.is_authenticated %}
     {% if user == booking.user %}
-    <h1 class="text-center mt-3">Booking Update 1, {{ booking.id }}</h1>
+    <h1 class="text-center mt-3">Edit Event</h1>
 
     <div class="shadow p-4 mb-5 bg-body bg-body rounded text-black  m-5 ">
         <form method="POST" action="{% url 'bookingUpdate' booking.id %}" class="me-2 ms-2" required>

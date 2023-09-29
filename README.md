@@ -9,7 +9,9 @@ The objective of this is to provide a simple site to try to organise gaming even
 
 
 ## Table of Contents
-
+2
+  3
+    4
 1. [User Experience (UX)](#user-experience-ux)
     1. [Strategy](#strategy)
         1. [Project Goals](#project-goals)
@@ -18,7 +20,13 @@ The objective of this is to provide a simple site to try to organise gaming even
         1. [Database Model](#database-model)
         2. [Wireframes](#wireframe)
 2. [Features](#features)
-    1. [Features Left to Implement](#features-left-to-implement)
+    1. [Nav Bar](#the-nav-bar)
+    2. [Home Page](#home-page)
+    3. [Event Details Page](#event-details-page)
+3. [Features Left to Implement](#features-left-to-implement)
+4. [Testing](#testing)
+  1. [Testing](#testing)
+4. [Credits](#credits)
 
 ***
 
@@ -66,7 +74,7 @@ Profile | ![Desktop index / user logged in wireframe image](assets/readme/profil
 
 ### Features 
 
-- __The Nav Bar__
+#### The Nav Bar
 
   - Featured at the top of the page, bracketed by the site name and catchfrase we have the nav links
   - If you're not logged in you see, A Home link that show all the events with some detals, the register link - lets you register and the Login link which lets you log in if you are already registered.  
@@ -74,7 +82,7 @@ Profile | ![Desktop index / user logged in wireframe image](assets/readme/profil
   - If you are logged in you see, A Home link that show all the events with some detals, Add Events which lets you add events, and a User dropdown which lets you logout and view your profile(To be expanded)  
   ![Logged in Nav](assets/readme/innav.PNG)
 
-- __Home Page body__
+#### Home Page
 
   - This section is the main focus of the website(for now). Here you see all the Events that have been posted by users with some detail.
   - As a logged in user you can view more details on the Events or if you posted the Event you can access the Edit and Delete functions from here.  
@@ -83,42 +91,40 @@ Profile | ![Desktop index / user logged in wireframe image](assets/readme/profil
   - As a logged out user you can only see the Event panels.
   ![Logged out Index](assets/readme/outindexbody.PNG)
 
-- __Event Details Page__  
+#### Event Details Page  
 
 - In the first section you can see all the details for the events.
 ![Details secion one](assets/readme/detialsone.PNG)
+- In the second section you can mark yourself as attanding the event, see previous comments and leave a comment of your own.
+![Details secion one](assets/readme/detailstwo.PNG)  
+
 
 ### Features Left to Implement
 
 - Fleshed out Profile for users
 - Ability for Users to see others Profiles
 - Ability to message others
+- Ability to upload custom images for events
+- Reset passwords
 - Features left on Stretch
 
 ## Testing 
 
 Ongoing testing on Chrome as features were added. Additional Testing was done desktop Edge, Firefox & Mobile Chrome. Manual testing was done following this checklist [Checklist](https://docs.google.com/spreadsheets/d/1UXtTze1940aCpoY0gpDi4OD64AhHgHELo6on6-MYtAA/edit?usp=sharing).
 
-[Incognito Lighthouse](#)
-
 ### Validator Testing 
 
-- HTML
-    - [W3C validator](#)
-- CSS
-    - [(Jigsaw) validator](#)
-
-
-### Unfixed Bugs
-- Updating Events broke after adding previously submitted dates as default.  
-- The desctiption on booking-submit is not dynamic depending on type selected.
-- 
+- HTML - [W3C validator](https://validator.w3.org/)
+    - Pages tested on W3C, all issues raise were fixed
+- CSS - [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator)
+    - CSS tested and no problems found, Majority of styling from Bootstrap
+- Python code was checked by running pycodestyle and pylint on all the apps. Unable to resolve pycodestyle on migration files.
 
 
 ### Fixed Bugs
+- Updating Events broke after adding previously submitted dates as default. 
 - When not logged it, colums do not display correctly on homepage, fixed with [Commit](https://github.com/EMarnus/PP4-Redo/commit/8f04d5038b0b07338a8e9da65b9a83187e89506f?diff=split)
 - Pagination doesn't work, just keeps flowing down. [Commit](https://github.com/EMarnus/PP4-Redo/commit/34cf80bb00148e4965a48b059a2a1252377f4600)
-- 
 
 
 ## Deployment
@@ -127,7 +133,7 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
   - In heroku Create a new App
   - In your new App go to settings and reveal Config Vars, add your variables from env.py as well as PORT: 8000
   - Make sure your repo contains a Procfile
-  - Go to Deply, select GitHub as the Deployment method, Deploy Branch from Main.
+  - Go to Deploy, select GitHub as the Deployment method, Deploy Branch from Main.
 
 
 ## Credits 
@@ -135,12 +141,12 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 - Codemy.com - [Django Wednesdays Playlist](https://bit.ly/35Xo9jD)
 - CI's I think Therefore I Blog - Used project as a base template for my site
 - Comment system built using  
-[djangocentral.com](https://djangocentral.com/creating-comments-system-with-django/#building-comment-model)
+[djangocentral.com](https://djangocentral.com/creating-comments-system-with-django/#building-comment-model)  
 [CodingEntrepreneurs ](https://www.youtube.com/watch?v=rKXVuG4axTg)
-And help from Sean, Code Institute Tutor.
+- And help from Sean, Code Institute Tutor.
 
 ### Content 
-
+- All content written by developer
 
 ### Media
 

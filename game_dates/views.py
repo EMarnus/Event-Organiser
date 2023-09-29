@@ -108,7 +108,8 @@ def bookingSubmit(request):
                 return redirect('index')
             else:
                 messages.success(
-                    request, "The Selected Date Isn't In The Correct Time Period!")
+                    request, "The Selected Date Isn't In The Correct Time \
+                        Period!")
         else:
             messages.success(request, "Please Select A Type!")
 
@@ -280,7 +281,8 @@ def bookingUpdateSubmit(request, booking_id):
                 return redirect('index')
             else:
                 messages.success(
-                    request, "The Selected Date Isn't In The Correct Time Period!")
+                    request, "The Selected Date Isn't In The Correct Time \
+                        Period!")
         else:
             messages.success(request, "Please Select A Type!")
         return redirect('postDetails')
@@ -299,7 +301,8 @@ def bookingDelete(request, booking_id):
         messages.success(request, "Event deleted!")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        messages.error(request, "You do not have permission to delete this Event")
+        messages.error(request, "You do not have permission to delete \
+            this Event")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -308,7 +311,8 @@ def checkEditTime(times, day, booking_id):
     appointment = Appointment.objects.get(pk=booking_id)
     time = appointment.time
     for k in times:
-        if Appointment.objects.filter(day=day, time=k).count() < 1 or time == k:
+        if (Appointment.objects.filter(day=day, time=k).count() < 1
+                or time == k):
             x.append(k)
     return x
 
@@ -321,8 +325,10 @@ def userUpdate(request, id):
     minDate = today.strftime('%Y-%m-%d')
 
     # 24h if statement in template:
-    delta24 = (userdatepicked).strftime('%Y-%m-%d') >= (today + timedelta(days=1)).strftime('%Y-%m-%d')
-    # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
+    delta24 = (userdatepicked).strftime('%Y-%m-%d') >= (today + timedelta(
+        days=1)).strftime('%Y-%m-%d')
+    # Calling 'validWeekday' Function to Loop days you
+    # want in the next 21 days:
     weekdays = validWeekday(22)
 
     # Only show the days that are not full:
