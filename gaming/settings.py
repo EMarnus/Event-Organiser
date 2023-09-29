@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-emarnus-pp4redo-25i7snoj67l.ws-eu105.gitpod.io', 'bar-match-bookings-site-929e26b7b02a.herokuapp.com', 'local']
+ALLOWED_HOSTS = ['8000-emarnus-pp4redo-25i7snoj67l.ws-eu105.gitpod.io', 'organise-game-times-6061e7e04787.herokuapp.com', 'local']
 
 
 # Application definition
