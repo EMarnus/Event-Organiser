@@ -15,7 +15,7 @@
     <div class="col-md-8 mt-3 offset-md-2">
         <form action="{% url 'register_user' %}" method=POST>
             {% csrf_token %}
-            <div class="mb-3 form-control">
+            <div class="mb-3">
                 {{ form.as_p }}
             </div>
             <div class="col-md-8 md-3">
