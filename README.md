@@ -106,6 +106,7 @@ Profile | ![Desktop index / user logged in wireframe image](assets/readme/profil
 - Ability to message others
 - Ability to upload custom images for events
 - Reset passwords
+- Delete confirmation
 - Features left on Stretch
 
 ## Testing 
@@ -119,6 +120,23 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 - CSS - [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator)
     - CSS tested and no problems found, Majority of styling from Bootstrap
 - Python code was checked by running pycodestyle and pylint on all the apps. Unable to resolve pycodestyle on migration files.
+
+### Lighthouse Resualts
+- Login  
+![Login](/assets/readme/lighthouse_login.PNG)
+
+- Register  
+![Register](/assets/readme/lighthouse_register.PNG)
+
+- Home  
+![Home](/assets/readme/lighthouse_home.PNG)
+
+- Profile  
+![Profile](/assets/readme/lighthouse_profile.PNG)
+
+- Add Event  
+![Add Event 1](/assets/readme/lighthouse_booking1.PNG)
+![Add Event 2](/assets/readme/lighthouse_booking2.PNG)
 
 
 ### Fixed Bugs
@@ -139,16 +157,14 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 ## Credits 
 - Can Sucullu - Mentor at Code Institute
 - Codemy.com - [Django Wednesdays Playlist](https://bit.ly/35Xo9jD)
+- The Dumbfounds Django Testing Tutorial - [Django Testing Tutoria](https://www.youtube.com/watch?v=qwypH3YvMKc&list=RDCMUC33uwXXDrI5TxG4IXnjS28g&index=3)
 - CI's I think Therefore I Blog - Used project as a base template for my site
 - Comment system built using  
 [djangocentral.com](https://djangocentral.com/creating-comments-system-with-django/#building-comment-model)  
 [CodingEntrepreneurs ](https://www.youtube.com/watch?v=rKXVuG4axTg)
-- And help from Sean, Code Institute Tutor.
+- Sean, Code Institute Tutor.
+- And as always Stack Overflow, just an awesome site where you can find all the answers especially the ones you weren't looking for.
 
 ### Content 
 - All content written by developer
-
-### Media
-
-- 
-- 
+- Placeholder image taken from Code Institute
