@@ -135,7 +135,7 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 ![Profile](/assets/readme/lighthouse_profile.PNG)
 
 - Add Event  
-![Add Event 1](/assets/readme/lighthouse_booking1.PNG)
+![Add Event 1](/assets/readme/lighthouse_booking1.PNG)  
 ![Add Event 2](/assets/readme/lighthouse_booking2.PNG)
 
 
@@ -157,7 +157,7 @@ Ongoing testing on Chrome as features were added. Additional Testing was done de
 ## Credits 
 - Can Sucullu - Mentor at Code Institute
 - Codemy.com - [Django Wednesdays Playlist](https://bit.ly/35Xo9jD)
-- The Dumbfounds Django Testing Tutorial - [Django Testing Tutoria](https://www.youtube.com/watch?v=qwypH3YvMKc&list=RDCMUC33uwXXDrI5TxG4IXnjS28g&index=3)
+- The Dumbfounds Django Testing Tutorial - [Django Testing Tutorial](https://www.youtube.com/watch?v=qwypH3YvMKc&list=RDCMUC33uwXXDrI5TxG4IXnjS28g&index=3)
 - CI's I think Therefore I Blog - Used project as a base template for my site
 - Comment system built using  
 [djangocentral.com](https://djangocentral.com/creating-comments-system-with-django/#building-comment-model)  
